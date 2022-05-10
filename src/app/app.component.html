@@ -1,0 +1,48 @@
+<form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+  <div class="form-group">
+    <label for="gender">Gender:</label>
+    <div>
+      <input
+        id="url"
+        type="radio"
+        value="url"
+        name="source"
+        formControlName="source"
+        (change)="resetFormAndCleatTable()"
+      />
+      <label for="male">URL</label>
+    </div>
+
+    <div>
+      <input
+        id="input"
+        type="radio"
+        value="input"
+        name="source"
+        formControlName="source"
+        (change)="resetFormAndCleatTable()"
+      />
+      <label for="female">Input</label>
+    </div>
+  </div>
+  <div>{{ myForm.controls.source.value }}</div>
+  <div *ngIf="myForm.controls.source.value === 'input'">
+    <label>
+      <textarea formControlName="text" placeholder="Text"> </textarea>
+    </label>
+  </div>
+  <div *ngIf="myForm.controls.source.value === 'url'">
+    <label>
+      <input formControlName="url" placeholder="URL" />
+    </label>
+  </div>
+
+  <button type="submit">Parse</button>
+</form>
+
+<table>
+  <tr *ngFor="let result of result">
+    <td>{{ result.word }}</td>
+    <td>{{ result.occurences }}</td>
+  </tr>
+</table>
